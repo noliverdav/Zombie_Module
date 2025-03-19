@@ -27,12 +27,14 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Distancia del raycast para detectar si el jugador esta en el suelo")]
     public float groundCheckDistance = 0.2f;
 
-    public bool isCrouching = false; // 🔥 Se actualiza desde PlayerCrouch
+    public bool isCrouching = false;
 
     private CharacterController characterController;
+
     private Vector3 velocity;
     private bool isGrounded;
     private bool canJump = true;
+
     private PlayerStamina stamina;
 
     void Start()
@@ -63,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
 
-        // 🔥 Bloquea sprint si está agachado
         bool isSprinting = !isCrouching && Input.GetKey(KeyCode.LeftShift) && stamina.CanSprint() && moveZ > 0;
         float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
